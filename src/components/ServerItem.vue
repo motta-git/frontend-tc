@@ -22,48 +22,47 @@ function handleEdit() {
 </script>
 
 <template>
-  <div class="server-card">
-    <img :src="server.image_url" :alt="server.host" class="server-image">
-    <div class="server-info">
-      <h3>{{ server.host }}</h3>
-      <p><strong>IP:</strong> {{ server.ip }}</p>
-      <p class="description">{{ server.description }}</p>
-    </div>
-    <div class="server-actions">
-      <button @click="handleEdit">Editar</button>
-      <button @click="handleDelete" class="delete-btn">Eliminar</button>
-    </div>
-  </div>
+  <tr>
+    <td><img :src="server.image_url" :alt="server.host" class="table-image"></td>
+    <td>{{ server.host }}</td>
+    <td>{{ server.ip }}</td>
+    <td class="description-cell">{{ server.description }}</td>
+    <td>
+      <div class="actions">
+        <button @click="handleEdit">Editar</button>
+        <button @click="handleDelete" class="delete-btn">Eliminar</button>
+      </div>
+    </td>
+  </tr>
 </template>
 
 <style scoped>
-.server-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.server-image {
-  width: 100%;
-  height: 200px;
+.table-image {
+  width: 60px;
+  height: 60px;
   object-fit: cover;
+  border-radius: 4px;
 }
-.server-info {
-  padding: 15px;
-  flex-grow: 1;
+
+.description-cell {
+  max-width: 300px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
-.description {
-  font-size: 0.9em;
-  color: #666;
-}
-.server-actions {
-  padding: 0 15px 15px;
+
+.actions {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
+
 .delete-btn {
   background-color: #e74c3c;
   color: white;
+}
+
+td {
+  padding: 8px 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
 }
 </style>

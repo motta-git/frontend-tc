@@ -11,13 +11,21 @@ function onEdit(serverId) {
 </script>
 
 <template>
-  <div class="server-grid" v-if="store.serverCount > 0">
-    <ServerItem 
-      v-for="server in store.servers" 
-      :key="server.id"
-      :server="server"
-      @edit-server="onEdit"
-    />
+  <div class="table-container" v-if="store.serverCount > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Host</th>
+          <th>IP</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ServerItem v-for="server in store.servers" :key="server.id" :server="server" @edit-server="onEdit" />
+      </tbody>
+    </table>
   </div>
   <div v-else>
     <p>No hay servidores para mostrar. ¡Agrega uno nuevo!</p>
@@ -25,10 +33,22 @@ function onEdit(serverId) {
 </template>
 
 <style scoped>
-.server-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  /* Para responsividad en pantallas pequeñas */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  background-color: #f4f4f4;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
 }
 </style>
