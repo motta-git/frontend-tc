@@ -1,12 +1,18 @@
 <script setup>
 import { useServerStore } from '@/stores/serverStore';
 import ServerItem from './ServerItem.vue';
+import draggable from 'vuedraggable'; // Import draggable
 
 const store = useServerStore();
 const emit = defineEmits(['edit-server']);
 
 function onEdit(serverId) {
   emit('edit-server', serverId);
+}
+
+// This function is called when the user finishes dragging
+function onDragEnd() {
+  store.saveOrder();
 }
 </script>
 
@@ -22,9 +28,11 @@ function onEdit(serverId) {
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody>
-        <ServerItem v-for="server in store.servers" :key="server.id" :server="server" @edit-server="onEdit" />
-      </tbody>
+      <draggable v-model="store.servers" tag="tbody" item-key="id" @end="onDragEnd">
+        <template #item="{ element: server }">
+          <ServerItem :server="server" @edit-server="onEdit" />
+        </template>
+      </draggable>
     </table>
   </div>
   <div v-else>
@@ -33,10 +41,10 @@ function onEdit(serverId) {
 </template>
 
 <style scoped>
+/* Styles remain the same */
 .table-container {
   width: 100%;
   overflow-x: auto;
-  /* Para responsividad en pantallas pequeñas */
 }
 
 table {
