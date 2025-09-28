@@ -2,6 +2,8 @@
 Interfaz de usuario para la aplicación de administración de servidores. 
 Es una Single-Page Application (SPA) desarrollada con Vue 3 (Composition API), Vite, y Pinia para el manejo de estado.
 
+El sitio web esta deployado en: https://frontend-tc.netlify.app/
+
 ## Características Principales
 - Vista de servidores en formato de tabla clara y ordenada.
 
